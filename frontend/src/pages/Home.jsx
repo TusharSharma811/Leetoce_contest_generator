@@ -33,7 +33,7 @@ const [title, setTitle] = useState('My Custom Contest');
       setLoading(true);
       
       // In a real implementation, this would call your backend API
-      const response = await fetch(`http://localhost:5000/api/random-problems?easy=${easyCount}&medium=${mediumCount}&hard=${hardCount}`);
+      const response = await fetch(`https://lcg-backend.onrender.com/api/random-problems?easy=${easyCount}&medium=${mediumCount}&hard=${hardCount}`);
       
       if (!response.ok) {
         throw new Error('Failed to fetch problems');
@@ -62,7 +62,7 @@ const [title, setTitle] = useState('My Custom Contest');
       ];
       
       // In a real implementation, this would call your backend API
-      const response = await fetch('http://localhost:5000/api/contests', {
+      const response = await fetch('https://lcg-backend.onrender.com/api/contests', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

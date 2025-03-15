@@ -1,0 +1,12 @@
+
+# LeetCode Contest Generator
+
+A custom tool designed to generate personalized LeetCode-style coding contests.
+
+## Features
+- Creates custom coding contests similar to LeetCode weekly contests
+- Allows selection of difficulty levels and problem types
+- Provides timed practice environment for competitive programming
+
+## Contributing
+Feel free to contribute by opening issues or submitting pull requests.
