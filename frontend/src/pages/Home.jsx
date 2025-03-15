@@ -281,7 +281,34 @@ const [title, setTitle] = useState('My Custom Contest');
                   </div>
                 </div>
               </div>
-              
+              <div>
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <h3 className="font-medium mb-2">Time Remaining</h3>
+                  {(() => {
+                    const [timeLeft, setTimeLeft] = useState(contestDetails.durationHours * 3600);
+                    
+                    useEffect(() => {
+                      const timer = setInterval(() => {
+                        setTimeLeft(prev => prev > 0 ? prev - 1 : 0);
+                      }, 1000);
+                      
+                      return () => clearInterval(timer);
+                    }, []);
+                    
+                    const hours = Math.floor(timeLeft / 3600);
+                    const minutes = Math.floor((timeLeft % 3600) / 60);
+                    const seconds = timeLeft % 60;
+                    
+                    return (
+                      <div className="font-mono text-2xl">
+                        {String(hours).padStart(2, '0')}:
+                        {String(minutes).padStart(2, '0')}:
+                        {String(seconds).padStart(2, '0')}
+                      </div>
+                    );
+                  })()}
+                </div>
+              </div>
               <div>
                 <h3 className="font-bold mb-3">Problem Set</h3>
                 <div className="bg-gray-50 p-4 rounded-lg">
