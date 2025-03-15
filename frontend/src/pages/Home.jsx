@@ -101,6 +101,17 @@ const [title, setTitle] = useState('My Custom Contest');
     });
   };
 
+
+  const [timeLeft, setTimeLeft] = useState(contestDetails.durationHours * 3600);
+                    
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(prev => prev > 0 ? prev - 1 : 0);
+    }, 1000);
+    
+    return () => clearInterval(timer);
+  }, [timeLeft]);
+
   return (
     <div className="flex flex-col items-center p-6 bg-gray-50 min-h-screen">
       <h1 className="text-3xl font-bold mb-8 text-center">LeetCode Contest Creator</h1>
@@ -171,7 +182,7 @@ const [title, setTitle] = useState('My Custom Contest');
                 
                 <button 
                   onClick={generateRandomProblems} 
-                  className="w-full hover:cursor-pointer"
+                  className="w-full hover:cursor-pointer bg-green-400 hover:bg-green-500 text-white py-2 rounded-md"
                   disabled={loading || (easyCount + mediumCount + hardCount === 0)}
                 >
                   <Zap className="mr-2 h-4 w-4" />
@@ -284,29 +295,12 @@ const [title, setTitle] = useState('My Custom Contest');
               <div>
                 <div className="bg-gray-50 p-4 rounded-lg">
                   <h3 className="font-medium mb-2">Time Remaining</h3>
-                  {(() => {
-                    const [timeLeft, setTimeLeft] = useState(contestDetails.durationHours * 3600);
-                    
-                    useEffect(() => {
-                      const timer = setInterval(() => {
-                        setTimeLeft(prev => prev > 0 ? prev - 1 : 0);
-                      }, 1000);
-                      
-                      return () => clearInterval(timer);
-                    }, []);
-                    
-                    const hours = Math.floor(timeLeft / 3600);
-                    const minutes = Math.floor((timeLeft % 3600) / 60);
-                    const seconds = timeLeft % 60;
-                    
-                    return (
                       <div className="font-mono text-2xl">
-                        {String(hours).padStart(2, '0')}:
-                        {String(minutes).padStart(2, '0')}:
-                        {String(seconds).padStart(2, '0')}
+                        {String(Math.floor(timeLeft / 3600)).padStart(2, '0')}:
+                        {String(Math.floor((timeLeft % 3600) / 60)).padStart(2, '0')}:
+                        {String(timeLeft % 60).padStart(2, '0')}
                       </div>
-                    );
-                  })()}
+                    
                 </div>
               </div>
               <div>
@@ -333,6 +327,9 @@ const [title, setTitle] = useState('My Custom Contest');
                               <span className="text-sm text-gray-500">
                                 Acceptance: {(problem.acRate).toFixed(1)}%
                               </span>
+                              <a href={`https://leetcode.com/problems/${problem.titleSlug}/description`} className="text-sm text-blue-600 hover:underline ml-3" target="_blank" rel="noopener noreferrer">
+                                Solve on LeetCode
+                              </a>
                             </div>
                           </div>
                         </div>
