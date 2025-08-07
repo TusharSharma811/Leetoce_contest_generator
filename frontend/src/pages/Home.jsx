@@ -96,7 +96,7 @@ const [title, setTitle] = useState('My Custom Contest');
   return (
     <div className="flex flex-col items-center p-6 bg-gray-50 min-h-screen">
       <h1 className="text-3xl font-bold mb-8 text-center">LeetCode Contest Creator</h1>
-      
+      <p>Check your skilld</p>
       {!contestCreated ? (
         <div className="w-full max-w-4xl">
           <div className="bg-white rounded-lg shadow-md mb-6">
